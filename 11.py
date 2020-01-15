@@ -82,4 +82,4 @@ def biggest_product(array, directions, inc):
 
 if __name__ == "__main__":
     print('The biggest product of {0} digits in any direction of the 2D is {1}'.format(digits, biggest_product(ar, directions, inc)))
-    pass
+    
