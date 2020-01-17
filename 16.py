@@ -5,7 +5,7 @@ Author: Juan Rios
 import math
 
 """
-This functions generates the solution using triangle numbers
+Sums the digits of the number n
 """
 def digits_sum(n):
     total = 0
