@@ -4,7 +4,6 @@ Author: Juan Rios
 """
 
 def unit_fraction(den):
-    number = '0.'
     residues = [0]*(den)
     sequence = []
     residues[1] = 1
@@ -21,12 +20,14 @@ def unit_fraction(den):
                 sequence.append(num//den)
                 residues[num%den] = len(sequence)+1
                 if num%den==0:
-                    #return number+''.join(str(i) for i in sequence)
+                    #Uncomment this if you want to see the numerical expression of the result 
+                    #return '0.'+''.join(str(i) for i in sequence)
                     return 0
             else:
                 sequence.append(num//den)
                 separator = residues[num%den]
-                #return number+''.join(str(i) for i in sequence[:separator-1])+'('+''.join(str(i) for i in sequence[separator-1:])+')'
+                #Uncomment this if you want to see the numerical expression of the result 
+                #return '0.'+''.join(str(i) for i in sequence[:separator-1])+'('+''.join(str(i) for i in sequence[separator-1:])+')'
                 return len(sequence[separator-1:])
             num %= den
 
