@@ -48,7 +48,7 @@ def total_pandigital_less():
             if prod < len(perm_4_index):
                 if perm_4_index[prod]==1:
                     if set(num1+num2+str(prod))=={'1','2','3','4','5','6','7','8','9'}:
-                                total.add(prod)
+                        total.add(prod)
     for num1 in perm_4:
         for num2 in perm_1:
             operations += 1
@@ -56,9 +56,9 @@ def total_pandigital_less():
             if prod < len(perm_4_index):
                 if perm_4_index[prod]==1:
                     if set(num1+num2+str(prod))=={'1','2','3','4','5','6','7','8','9'}:
-                                total.add(prod)
+                        total.add(prod)
         
-    return operations ,sum(total)
+    return sum(total)
 
 if __name__ == "__main__":
     print('The sum of all the products is {0}'.format(total_pandigital_less())) 
