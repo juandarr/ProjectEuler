@@ -9,7 +9,7 @@ import math
 def largest_pandigital():
     largest = 918273645
     digits_9=set('123456789')
-    for i in range(9876,9231,-1):
+    for i in range(9876,9230,-1):
         num = str(i)+str(2*i)
         if set(num)==digits_9:
             if int(num)> largest:
