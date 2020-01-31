@@ -9,7 +9,7 @@ import math
 Return the minimum different of the pair of pentagonal numbers
 """
 def minimum_difference(p):
-    d = 10**7
+    d = float('inf')
     for i in range(len(p)-1):
         if p[i+1]-p[i]>d:
             print('Found the limit, this is definitely the minimum!')
