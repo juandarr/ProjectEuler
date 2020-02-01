@@ -6,7 +6,7 @@ Author: Juan Rios
 import math
 
 """
-Return next number that is hexagonal, pentagonal and triangle
+Returns next number that is hexagonal, pentagonal and triangle
 """
 def geometric_number(starting_index):
     c = starting_index

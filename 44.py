@@ -6,7 +6,7 @@ Author: Juan Rios
 import math
 
 """
-Return the minimum different of the pair of pentagonal numbers
+Returns the minimum different of the pair of pentagonal numbers
 """
 def minimum_difference(p):
     d = float('inf')

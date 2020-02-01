@@ -33,7 +33,7 @@ def prime_factors(upper_limit, explicit_primes = True):
         return primes
 
 """
-Return first n consecutive numbers with n distinct prime factors each
+Returns first n consecutive numbers with n distinct prime factors each
 """
 def consecutive_with_distinct_primes(distinct):
     primes = prime_factors(10**6, True)

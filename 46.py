@@ -9,7 +9,7 @@ import math
  Returns an array with prime numbers using the prime sieve
  This array can be in two forms:
     - An array of the primes themselves
-    - Array of ones and zeros, where value is one where the index corresponds to a prime number
+    - Array of ones and zeros, where value is '1' where the index corresponds to a prime number
 """
 def prime_factors(upper_limit, explicit_primes = True):
     values = [1]*(upper_limit+1)
@@ -36,7 +36,7 @@ def prime_factors(upper_limit, explicit_primes = True):
  Returns an array with twice a square values under upper limit
  This array can be in two forms:
     - An array of twice a square themselves
-    - Array of ones and zeros, where value is one where the index corresponds to twice a square
+    - Array of ones and zeros, where value is '1' where the index corresponds to twice a square
 """
 def twice_a_square(upper_limit, explicit_array = True):
     values = [0]*(upper_limit+1)
@@ -55,7 +55,7 @@ def twice_a_square(upper_limit, explicit_array = True):
         
 
 """
-Return the smallest odd composite that cannot be written as the sum of a prime and twice a square
+Returns the smallest odd composite that cannot be written as the sum of a prime and twice a square
 """
 def smalles_odd_compositve():
     primes_array = prime_factors(10**6, False)
@@ -63,8 +63,8 @@ def smalles_odd_compositve():
     twice = twice_a_square(10**6, False)
     i = 9
     while True:
-        condition = False
         if primes_array[i]==0:
+            condition = False
             for p in primes:
                 if (p<i):
                     j = i - p
