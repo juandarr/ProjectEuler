@@ -5,7 +5,7 @@ Author: Juan Rios
 import math
 
 """
-Calculate the possible combinations of coint to equate value
+Calculate the possible combinations of coins to equate value
 """
 def find_combs(coins,value, index):
     if value%coins[index]==0 and index==0:
@@ -20,9 +20,6 @@ def find_combs(coins,value, index):
             tmp_value = value - i*coins[index]
             combs += find_combs(coins, tmp_value, index-1)
         return combs
-
-
-
 
 if __name__ == "__main__":
     value = 200
