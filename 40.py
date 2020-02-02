@@ -11,7 +11,6 @@ def irrational_product(limit_power):
     i =1
     d = 1
     power =1
-    num ='1'
     powers_10 = [10**i for i in range(1,limit_power+1)]
     index = 0
     while (True):
