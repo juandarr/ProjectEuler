@@ -30,7 +30,7 @@ def prime_factors(upper_limit, explicit_primes = True):
 """
 Calculate the combinations of n elements in k places
 """
-def elements_comb_k(elements,k):
+def elements_comb_k(elements,k, as_index = False):
     comb = []
     n = len(elements)
     for i in elements:
@@ -47,6 +47,7 @@ def elements_comb_k(elements,k):
         for elem in tmp:
             comb.append(''.join(sorted(elem)))
     return comb
+    
 
 """
 Calculate permutations of n elements in k positions
