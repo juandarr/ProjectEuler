@@ -9,7 +9,7 @@ from utils import prime_factors
 """
 Returns smallest prime from the family of primes
 """
-def prime_digit_replacements_alt():
+def prime_digit_replacements():
     primes_check = prime_factors(10**6, False)
     visited =[0]*(10**6+1)
 
@@ -39,7 +39,6 @@ def prime_digit_replacements_alt():
                 tmp = value
                 for i in var:
                     tmp= tmp[:int(i)]+str(d)+tmp[int(i)+1:]
-                visited[int(tmp)] = 1
                 if len(str(int(tmp)))==len(value):
                     if primes_check[int(tmp)]:
                         prime_counter += 1
@@ -52,7 +51,6 @@ def prime_digit_replacements_alt():
         number += 2
         while not(primes_check[number]):
             number += 2
-        visited[number] = 1
         
 if __name__ == "__main__":
-    print('The smallest prime with a family of 8 primes is {0}'.format(prime_digit_replacements_alt())) 
+    print('The smallest prime with a family of 8 primes is {0}'.format(prime_digit_replacements())) 
