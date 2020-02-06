@@ -7,7 +7,7 @@ import math
 from utils import prime_factors
 
 """
-Return 1 if the number is prime, 0 otherwise
+Returns 1 if the number is prime, 0 otherwise
 """
 def is_prime(number, primes):
     for p in primes:
@@ -16,7 +16,7 @@ def is_prime(number, primes):
         if number%p==0:
             return 0
 """
-Return the length of the spiral at which the ratio between primes and diagonals falls below 10%
+Returns the length of the spiral at which the ratio between primes and diagonals falls below 10%
 """
 def ratio_tracker():
     primes_index = prime_factors(10**6,False)
