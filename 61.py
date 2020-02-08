@@ -4,7 +4,6 @@ Finds the sum of the only ordered set of six cyclic 4-digit numbers of polygonal
 
 import math
 
-
 def get_polygonal(lower_limit, upper_limit):
     octagonal = []
     heptagonal = []
