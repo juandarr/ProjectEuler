@@ -12,8 +12,9 @@ encrypted = [36,22,80,0,0,4,23,25,19,17,88,4,4,19,21,11,88,22,23,23,29,69,12,24,
 Returns the password that decrypts the message
 """
 def find_password_and_decrypt():
-    f = open("passwords.txt", "w")
-    f.write("Passwords and decryption list!\n")
+    max_score = 0
+    psw =''
+    msg = ''
     for i0 in range(ord('a'), ord('z')+1):
         for i1 in range(ord('a'), ord('z')+1):
             for i2 in range(ord('a'), ord('z')+1):
@@ -21,16 +22,23 @@ def find_password_and_decrypt():
                 password = [i0,i1,i2]
                 index = 0
                 valid = True
+                score = 0
                 for c in encrypted:
                     if c^password[index] not in chain(range(32,127)):
                         valid = False
                         break
+                    if c^password[index] in [65,69,78,84,97,101,110,116]:
+                        score += 1
                     decrypted.append(c^password[index])
                     index += 1
                     if index==3:    index = 0
-                if valid and ''.join([chr(i) for i in password])=='exp':
-                    print(''.join([chr(i) for i in password])+'\n'+''.join([chr(i) for i in decrypted]))
-                    return sum(decrypted)
+                if valid:
+                    if score> max_score:
+                        max_score = score
+                        psw = password
+                        msg = decrypted
+    print(str(max_score)+'--- This is the password: '+''.join([chr(i) for i in psw])+'\n'+''.join([chr(i) for i in msg])) 
+    return sum(msg)
                     
     
 if __name__ == "__main__":
