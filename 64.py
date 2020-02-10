@@ -16,12 +16,10 @@ def get_sequence_period(i):
     while True:
         num = -num
         den = int((i-num**2)/den)
-        
         if [orig_num,orig_den]==[num,den] and not(start):
-            print(i, len(sequence[1:]))
             return len(sequence[1:])
-
-        mul=[j for j in range(1,i//den+1) if (num-den*j)**2<i][-1]
+        # Finds the square root of the multiple of den that achieves the (num-den*mul) closest to i
+        mul = int(((2*num*den+math.sqrt(4*(num**2)*(den**2)-4*(den**2)*((num**2)-i)))/(2*(den**2))))
         sequence.append(mul)
         num = num-den*mul
 
@@ -40,10 +38,4 @@ def continued_fractions_odd(limit_range):
     
 if __name__ == "__main__":
     limit_range = 10000
-    '''
-    for i in range(2,21):
-        if math.sqrt(i)!=int(math.sqrt(i)):
-            print(i)
-            get_sequence_period(i)
-    '''
     print('The number of continued fractions sqrt(N) for N <= {0} with an odd period is {1}'.format(limit_range, continued_fractions_odd(limit_range)))
