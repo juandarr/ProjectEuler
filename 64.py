@@ -9,7 +9,7 @@ def get_sequence_period(i):
     sequence = [int(math.sqrt(i))]
     num = -sequence[-1]
     den = 1
-    orig_num = sequence[-1]
+    orig_num = -num
     orig_den = i-orig_num**2
     start = True
 
@@ -18,9 +18,10 @@ def get_sequence_period(i):
         den = int((i-num**2)/den)
         if [orig_num,orig_den]==[num,den] and not(start):
             return len(sequence[1:])
-        # Finds the square root of the multiple of den that achieves the (num-den*mul) closest to i
+        # Finds the square root of the multiple of den that achieves the (num-den*mul)**2 closest to i
         mul = int(((2*num*den+math.sqrt(4*(num**2)*(den**2)-4*(den**2)*((num**2)-i)))/(2*(den**2))))
         sequence.append(mul)
+        counter += 1
         num = num-den*mul
 
         start = False
