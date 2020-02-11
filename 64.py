@@ -10,7 +10,7 @@ def get_sequence_period(i):
     num = -sequence[-1]
     den = 1
     orig_num = -num
-    orig_den = i-orig_num**2
+    orig_den = int(i-orig_num**2)
     start = True
 
     while True:
@@ -21,7 +21,6 @@ def get_sequence_period(i):
         # Finds the square root of the multiple of den that achieves the (num-den*mul)**2 closest to i
         mul = int(((2*num*den+math.sqrt(4*(num**2)*(den**2)-4*(den**2)*((num**2)-i)))/(2*(den**2))))
         sequence.append(mul)
-        counter += 1
         num = num-den*mul
 
         start = False
@@ -33,7 +32,7 @@ def continued_fractions_odd(limit_range):
     counter = 0
     for i in range(2,limit_range+1):
         if math.sqrt(i)!=int(math.sqrt(i)):
-            if get_sequence_period(i)%2==1:
+            if get_sequence_period_numeric(i)%2==1:
                 counter += 1
     return counter
     
