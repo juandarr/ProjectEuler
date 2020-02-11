@@ -6,23 +6,24 @@ Author: Juan Rios
 import math
 from utils import prime_factors
 
-def get_sequence_period_e():
-    sequence = [2,1,2]
+def get_sequence_period_e(term):
+    sequence = [2]
     tmp = [1,1,2]
-    while len(sequence)<107:
+    while len(sequence)<term:
         tmp[2] += 2
         sequence += tmp
     return sequence
 
-def sum_digits_100th():
-    sequence = get_sequence_period_e()[2:]
+def sum_digits_100th(term):
+    sequence = get_sequence_period_e(term)
     a = 2
     b = 3
-    for i in range(len(sequence[:100-2])):
+    for i in sequence[:term-2]:
         tmp = b
-        b = b*sequence[i]+a
+        b = b*i+a
         a = tmp
     return sum([int(i) for i in str(b)])
 
 if __name__ == "__main__":
-    print('The 100th convergent of the continued fractions for e is {0}'.format(sum_digits_100th()))
+    term = 100
+    print('The {0}th convergent of the continued fractions for e is {1}'.format(term,sum_digits_100th(term)))
