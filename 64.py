@@ -32,7 +32,7 @@ def continued_fractions_odd(limit_range):
     counter = 0
     for i in range(2,limit_range+1):
         if math.sqrt(i)!=int(math.sqrt(i)):
-            if get_sequence_period_numeric(i)%2==1:
+            if get_sequence_period(i)%2==1:
                 counter += 1
     return counter
     
