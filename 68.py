@@ -58,7 +58,7 @@ def get_max_string():
                     break
         if is_solution:
             index_min = outer.index(min(outer))
-            num = ''.join([''.join([str(i) for i in [outer[index%5]]+solution[index%5]]) for index in range(index_min, index_min+len(outer))])
+            num = ''.join([''.join([str(i) for i in [outer[index%len(outer)]]+solution[index%len(outer)]]) for index in range(index_min, index_min+len(outer))])
             if int(num)> max_num:
                 max_num = int(num)
     return max_num
