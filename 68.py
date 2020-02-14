@@ -25,42 +25,42 @@ def get_max_string():
     for outer in outer_ring_perm:
         visited = [-1,-1]
         set_inner = set()
-        solution = True
-        while len(set_inner)!=5:
-            current_tuple = []
-            set_inner = set()
-            visited[1]=-1
+        is_solution = True
+        while True:
             if visited[0]==19:
-                solution = False
+                is_solution = False
                 break
+            solution = []
+            set_inner_visited = set()
+            visited[1]=-1
             for index in range(2):
                 diff = outer[2*index+1]-outer[2*index]
                 for p_index in range(visited[index]+1,len(tuples_pairs)):
-                    if current_tuple!=[]:
-                        if current_tuple[-1][1]!=tuples_pairs[p_index][0][0] or tuples_pairs[p_index][0][1] in set_inner:
+                    if solution!=[]:
+                        if solution[-1][1]!=tuples_pairs[p_index][0][0] or tuples_pairs[p_index][0][1] in set_inner:
                             continue
                     found = False
                     visited[index] = p_index
                     for comb in tuples_pairs[p_index][1]:
                         if sum(tuples_pairs[p_index][0])-sum(comb)==diff:
-                            if current_tuple!=[]:
-                                if outer[0]+sum(current_tuple[0])!=outer[2]+sum(tuples_pairs[p_index][0]):
+                            if solution!=[]:
+                                if outer[0]+sum(solution[0])!=outer[2]+sum(tuples_pairs[p_index][0]):
                                     continue
-                            current_tuple.append(list(tuples_pairs[p_index][0]))
-                            current_tuple.append(comb)
-                            set_inner = set_inner.union(set(list(tuples_pairs[p_index][0])+comb))
+                            solution +=[list(tuples_pairs[p_index][0]), comb]
+                            set_inner_visited = set_inner_visited.union(set(list(tuples_pairs[p_index][0])+comb))
                             found = True
                             break
                     if found:
                         break
-        if solution:
-            current_tuple.append([current_tuple[3][1],current_tuple[0][0]])
-            if outer[0]+sum(current_tuple[0])==outer[4]+sum(current_tuple[-1]):
-                index_min = outer.index(min(outer))
-                index = index_min
-                num = ''.join([''.join([str(i) for i in [outer[index%5]]+current_tuple[index%5]]) for index in range(index_min, index_min+len(outer))])
-                if int(num)> max_num:
-                    max_num = int(num)
+            if len(set_inner_visited)==5:
+                if outer[0]+sum(solution[0])==outer[4]+solution[3][1]+solution[0][0]:
+                    solution.append([solution[3][1],solution[0][0]])
+                    break
+        if is_solution:
+            index_min = outer.index(min(outer))
+            num = ''.join([''.join([str(i) for i in [outer[index%5]]+solution[index%5]]) for index in range(index_min, index_min+len(outer))])
+            if int(num)> max_num:
+                max_num = int(num)
     return max_num
 
 if __name__ == "__main__":
