@@ -6,14 +6,6 @@ Author: Juan Rios
 import math
 from utils import prime_factors
 
-'''
-3/7 quot: 0.42857142857142855
-One prime: 428551 999953 quot: 0.42857114284371367
-One prime and 3/7: 3*142787/(7*142789) quot: 0.4285654257080627
-300000/700001   quot: 0.42857081632740524
-428567 999990 quot: 0.42857128571285713
-428570/999997 quot: 0.42857128571385716
-'''
 
 def get_n(limit_value):
     limit_sqrt = int(math.sqrt(limit_value))
