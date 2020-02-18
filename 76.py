@@ -1,11 +1,11 @@
 """
-Finds all possible combinations of coins to generate value
+Finds all possible combinations of integers below value to generate value
 Author: Juan Rios
 """
 import math
 
 """
-Calculate the possible combinations of coins to equate value
+Calculate the possible combinations of integers from 1 to 99 to sum 100
 """
 def find_combs(coins,value, index):
     if value%coins[index]==0 and index==0:
@@ -24,10 +24,6 @@ def find_combs(coins,value, index):
         return combs
 
 if __name__ == "__main__":
-    value = 200
-    coins = [1,2,5,10,20,50,100,200]
-    for i in range(len(coins)-1,-1,-1):
-        if (coins[i]<=value):
-            index = i
-            break
-    print('The total possible combination to generate the value {0} is {1}'.format(value, find_combs(coins,value, index))) 
+    value = 100
+    coins = [i for i in range(1,value)]
+    print('The total possible combination of integers to generate the value {0} is {1}'.format(value, find_combs(coins,value,len(coins)-1))) 
