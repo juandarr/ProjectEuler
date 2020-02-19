@@ -5,25 +5,42 @@ Author: Juan Rios
 import math
 
 """
-Calculate the possible combinations of integers from 1 to 99 to sum 100
+Calculate the possible number of partitions
 """
-def find_combs(coins,value, index):
-    if value%coins[index]==0 and index==0:
-        return 1
-    if index==0:
-        return 0
-    else:
-        max_counter = value//coins[index]
-        combs = 0
-        if value%coins[index]==0:
-            combs += 1
-            max_counter -= 1
-        for i in range(max_counter, -1, -1):
-            tmp_value = value - i*coins[index]
-            combs += find_combs(coins, tmp_value, index-1)
-        return combs
+def find_partitions_dict(limit_value):
+    p = {(1,1):0}
+    for i in range(2,limit_value+1):
+        tmp = 1
+        index = 1
+        while index<=(i-index):
+            tmp += p[(i-index,index)]
+            index += 1
+        p[(i,1)]=tmp
+        index = 2
+        while index<=i:
+            if index<=(i//2):
+                p[(i,index)]= p[(i,index-1)]-p[(i-index+1,index-1)]
+            else:
+                p[(i,index)]= 1
+            index += 1
+    return p[(i,1)]
+
+def find_partitions_array(limit_value):
+    p = [[0]]
+    for i in range(2,limit_value+1):
+        tmp = 1
+        for index in range(1,i//2+1):
+            tmp += p[i-index-1][index-1]
+        p.append([tmp])
+        for index in range(2,i+1):
+            if index<=(i//2):
+                p[i-1].append(p[i-1][index-2]-p[i-index][index-2])
+            else:
+                for c in range(0,i-index+1):
+                    p[i-1].append(1)
+                break
+    return p[i-1][0]
 
 if __name__ == "__main__":
-    value = 100
-    coins = [i for i in range(1,value)]
-    print('The total possible combination of integers to generate the value {0} is {1}'.format(value, find_combs(coins,value,len(coins)-1))) 
+    limit_value = 100
+    print('The total possible combination of integers to generate the value {0} is {1}'.format(limit_value,find_partitions_array(limit_value)))
