@@ -55,12 +55,14 @@ def division(a,b):
             while res<b:
                 res *= 10
                 q.append(0)
+        if len(q)==100:
+            break
         quot = res//b
         res = res%b
         q.append(quot)
         if res==0:
             break
-    return q[0:100]
+    return q
 
 if __name__ == "__main__":
     total = 0
