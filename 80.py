@@ -71,5 +71,3 @@ if __name__ == "__main__":
             a,b=decimals_n_value(i, 200)
             total += sum(division(a,b))
     print('The sum of the first 100 decimals of the first 100 square roots (if irrational) is {0}'.format(total))
-#40760
-#40928
