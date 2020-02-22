@@ -1,5 +1,5 @@
 """
-Finds the minimal path sum from to top left corner to the bottom right corner of a matrix
+Finds the minimal path sum from the top left node to the bottom right node traversing the matrix up, down, left and right
 Author: Juan Rios
 """
 import math
@@ -89,41 +89,44 @@ value = value.split('\n')
 for i in range(len(value)):
     value[i] = [int(d) for d in value[i].split(',')]
 
-#value =[[131,673,234,103,18],[201,96,342,965,150],[630,803,746,422,111],[537,699,497,121,956],[805,732,524,37,331]]
-
 """
 Calculate the minimum path from top left to bottom right
 """
-def dijkstra_minimum_path_sum(value,starting_node,end_node):
+def dijkstra_minimum_path_sum(value,starting_node):
     current_node = starting_node
     cost = value[starting_node[0]][starting_node[1]]
     routes_from_start = {}
     for i in range(len(value)):
         for j in range(len(value)):
-            routes_from_start[(i,j)] = float('inf')
-    routes_from_start[current_node]= cost
+            routes_from_start[(i,j)] = [float('inf'),[0,0]]
+    routes_from_start[current_node]= [cost,[0,0]]
     visited = {}
-    directions = [[1,0],[0,1]]
+    directions = [[1,0],[-1,0],[0,1],[0,-1]]
     while current_node:
         visited[current_node] = 1
-        cost = routes_from_start[current_node]
+        cost = routes_from_start[current_node][0]
+        exclude_direction = routes_from_start[current_node][1]
         for d in directions:
+            if (current_node[0],d)==(0,[0,-1]) or (current_node[0],d)==(len(value)-1,[0,-1]) or (current_node[1],d)==(0,[-1,0]) or (current_node[1],d)==(len(value)-1,[-1,0]):
+                continue
+            if d==exclude_direction:
+                continue
             x = current_node[0]+d[0]
             y = current_node[1]+d[1]
-            if x==len(value) or y==len(value):
+            if x==len(value) or x<0 or y==len(value) or y<0:
                 continue
             tmp_node = (x,y)
             tmp_cost = cost + value[x][y]
-            if routes_from_start[tmp_node]>tmp_cost:
-                routes_from_start[tmp_node] = tmp_cost
+            if routes_from_start[tmp_node][0]>tmp_cost:
+                routes_from_start[tmp_node] = [tmp_cost,[-1*d[0],-1*d[1]]]
         current_node = None
         minimum = float('inf')
         for node in routes_from_start:
-            if routes_from_start[node]<minimum and node not in visited:
+            if routes_from_start[node][0]<minimum and node not in visited:
                 is_there_node = True
-                minimum = routes_from_start[node]
+                minimum = routes_from_start[node][0]
                 current_node = node
-    return routes_from_start[end_node]           
+    return routes_from_start[(len(value)-1,len(value)-1)][0]         
 
 if __name__ == "__main__":
-    print('The minimal path sum from top left corner to bottom right corner is {0}'.format(dijkstra_minimum_path_sum(value,(0,0),(len(value)-1, len(value)-1)))) 
+    print('The minimal path sum from top left corner to bottom right corner is {0}'.format(dijkstra_minimum_path_sum(value,(0,0)))) 
