@@ -1007,10 +1007,10 @@ XXXXVIIII"""
 
 romans = romans.split('\n')
 
-"""
-Read roman number in valid form
-"""
 def read_number(value, roman_dict):
+    """
+    Read roman number in valid form
+    """
     index = 0
     number = 0
     while index < len(value):
@@ -1023,10 +1023,10 @@ def read_number(value, roman_dict):
         index += 1
     return number
 
-"""
-Return minimal form of value in roman numeral
-"""
 def minimal_roman(value):
+    """
+    Return minimal form of value in roman numeral
+    """
     tmp = ''
 
     # First the thousands
@@ -1079,10 +1079,10 @@ def minimal_roman(value):
             tmp += 'I'
     return tmp
 
-"""
-Calculates number of characters saved
-"""
 def characters_saved(roman_dict):
+    """
+    Calculates number of characters saved
+    """
     sub = 0
     for roman in romans:
         number = read_number(roman,roman_dict)
