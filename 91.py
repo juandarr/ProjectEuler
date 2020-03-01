@@ -14,6 +14,25 @@ def find_factors(number):
             factors.append([d,number//d])
     return factors
 
+def find_triangles(dimension):
+    combs = 0
+    points_stored = {}
+    for x1 in range(1,dimension+1):
+        for y1 in range(1,dimension+1):
+            for x2 in range(1,dimension+1):
+                for y2 in range(1,dimension+1):
+                    c = (x2,y2)
+                    a = (x1,y1)
+                    if a==c:
+                        continue
+                    b = (x2-x1,y2-y1)
+                    if a[0]*b[0]+a[1]*b[1]==0 or c[0]*b[0]+c[1]*b[1]==0:
+                        if (a,c) not in points_stored:
+                            if (c,a) not in points_stored:
+                                points_stored[(a,c)] = 1
+                                combs += 1
+    return combs
+    
 def right_triangle_counter(dimension):
     """
     Calculates the number of right triangles in a grid of dimension+1
@@ -34,25 +53,6 @@ def right_triangle_counter(dimension):
                         triangles += 4
     triangles += find_triangles(dimension)
     return triangles
-
-def find_triangles(dimension):
-    combs = 0
-    points_stored = {}
-    for x1 in range(1,dimension+1):
-        for y1 in range(1,dimension+1):
-            for x2 in range(1,dimension+1):
-                for y2 in range(1,dimension+1):
-                    c = (x2,y2)
-                    a = (x1,y1)
-                    if a==c:
-                        continue
-                    b = (x2-x1,y2-y1)
-                    if a[0]*b[0]+a[1]*b[1]==0 or c[0]*b[0]+c[1]*b[1]==0:
-                        if (a,c) not in points_stored:
-                            if (c,a) not in points_stored:
-                                points_stored[(a,c)] = 1
-                                combs += 1
-    return combs
 
 if __name__ == "__main__":
     dimension = 50
