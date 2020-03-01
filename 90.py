@@ -58,9 +58,10 @@ def number_of_arrangements(squares):
     Calculates the number of arrangements of two dices
     """
     arrangements = {}
-    for dice1 in combinations([i for i in range(10)],6):
+    cubes= list(combinations([i for i in range(10)],6))
+    for i,dice1 in enumerate(cubes):
         d1 = set(dice1)
-        for dice2 in combinations([i for i in range(10)],6):
+        for dice2 in cubes[i+1:]:
             d2 = set(dice2)
             if check_arrangement(d1,d2):      
                 if (dice1,dice2) not in arrangements:
