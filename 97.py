@@ -5,7 +5,6 @@ Author: Juan Rios
 import math
 
 def product(limit_exp,exp,mul):
-    
     digits = [0]*10
     i = 1
     digits[9]=1
@@ -17,6 +16,7 @@ def product(limit_exp,exp,mul):
             res = num%10
             digits[d]=res
         i += 1
+
     val = int(''.join([str(i) for i in digits]))
     print(val)
     mult = str(mul)
