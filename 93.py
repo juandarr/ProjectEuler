@@ -29,6 +29,10 @@ def expression_generation():
                                 values.add(int(number))
                         except:
                             continue
+                    if len(set(op))==1:
+                        break
+                if len(set(op_comb))==1:
+                    continue
         values = sorted(list(values))
         chains = [1]
         counter = 1
