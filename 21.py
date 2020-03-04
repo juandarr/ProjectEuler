@@ -1,5 +1,5 @@
 """
-Finds the sum of all amicable numbers below 10000
+Finds the sum of all  numbers below 10000
 Author: Juan Rios
 """
 import math

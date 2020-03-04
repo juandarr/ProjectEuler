@@ -23,7 +23,3 @@ if __name__ == "__main__":
     limit_exp = 10**9
     print('The sum of perimeters of all almost equilaterals with perimeters below or equal to {0} is {1}'.format(limit_exp, almost_equilateral(limit_exp))) 
 
-# wrong: 4677191112
-# wrong: 109552592
-# wrong: 872487860
-# wrong: 
