@@ -5,18 +5,18 @@ Author: Juan Rios
 import math
 from itertools import combinations
 
-def find_probability(initial_value):
-    i = initial_value
+def find_probability(limit_value):
+    i = 0
     while True:
-        if i%2==1:
-            squared = 1+2*(i**2-1)
-            root = math.sqrt(squared)
-            if int(root+0.5)**2==squared:
-                return squared
+        f_m = 3-2*math.sqrt(2)
+        f_p = 3+2*math.sqrt(2)
+
+        t1 = (-f_m**i-math.sqrt(2)*f_m**i-f_p**i+math.sqrt(2)*f_p**i+2)/4
+        b1 = (2*f_m**i+math.sqrt(2)*f_m**i+2*f_p**i-math.sqrt(2)*f_p**i+4)/8
         i += 1
-        print(i)
-        #print(i)
+        if t1>limit_value:
+            return round(b1)
 
 if __name__ == "__main__":
-    initial_value = int(math.sqrt(2*(10**24)-2*10**12+1))+1
-    print('The first arrangement of over {0} discs with a probability of 50% of taking two blue discs is {1}'.format(initial_value, find_probability(initial_value))) 
+    limit_value = 10**12
+    print('The first arrangement for blue discs of over {0} total discs with a probability of 50% of taking two blue discs is {1}'.format(limit_value, find_probability(limit_value))) 
