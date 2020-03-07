@@ -25,15 +25,20 @@ def polynomial_fit(values,k_limit):
         b = np.matrix(b)
         x = solve_matrix_equation(A,b)
         tmp = []
-        n = 1
         for i in range(0,len(values)):
-            tmp.append(sum([x[i]*(i+1)**s for s in range(len(values))]))
+            tmp.append(sum([round(x[idx,0])*(i+1)**idx for idx in range(len(x))]))
         approximations.append(tmp)
-    print(values, approximations)
-
+    total = 0
+    for k in range(k_limit):
+        for idx in range(len(approximations[k])):
+            if approximations[k][idx]!=values[idx]:
+                total += approximations[k][idx]
+                break
+    return int(total)
+    
 if __name__ == "__main__":
     values = []
     for i in range(1,20):
-        values.append(i**3)
-    k_limit = 5
-    print('The sum of the First incorrect term of BadOPs for the generator is {0}'.format(polynomial_fit(values,k_limit))) 
+        values.append(1-i+i**2-i**3+i**4-i**5+i**6-i**7+i**8-i**9+i**10)
+    k_limit = 11
+    print('The sum of the First incorrect term of Bad OP (optimum polynomial) for the generator is {0}'.format(polynomial_fit(values,k_limit))) 
