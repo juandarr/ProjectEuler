@@ -1,9 +1,8 @@
 """
-Finds the largest square formed by any member of a set of anagram pairs
+Finds the number of triangles containing the origin in its interior
 Author: Juan Rios
 """
 import math
-from itertools import combinations
 
 def read_triangle_points(filename):
     """
