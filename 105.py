@@ -31,7 +31,7 @@ def test_special_sets(filename):
                 break
         if not is_special:
            continue
-        for i in range(1,len(number_set)):
+        for i in range(1,(len(number_set)//2)+1):
             options = [j for j in range(len(number_set))]
             for comb in combinations(options,i):
                 a = 0
@@ -39,27 +39,26 @@ def test_special_sets(filename):
                 for idx in comb:
                     a += number_set[idx]
                     complement.remove(idx)
-                if i <= len(complement):
-                    for j in range(max(i,2),len(complement)+1):
-                        for comb2 in combinations(complement,j):
-                            b = 0
-                            for idx in comb2:
-                                b += number_set[idx]
-                            if a==b:
-                                is_special=False
-                                break
-                            if i>j:
-                                if a<b:
-                                    is_special = False
-                                    break
-                            elif i<j:
-                                if a>b:
-                                    is_special = False
-                                    break
-                        if not is_special:
+                for j in range(max(i,2),len(complement)+1):
+                    for comb2 in combinations(complement,j):
+                        b = 0
+                        for idx in comb2:
+                            b += number_set[idx]
+                        if a==b:
+                            is_special=False
                             break
+                        if i>j:
+                            if a<b:
+                                is_special = False
+                                break
+                        elif i<j:
+                            if a>b:
+                                is_special = False
+                                break
                     if not is_special:
                         break
+                if not is_special:
+                    break
             if not is_special:
                 break
         if is_special:
