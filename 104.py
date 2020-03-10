@@ -28,6 +28,7 @@ def pandigital_fibonnaci():
         k += 1
         a = tmp
         if sorted(b)==pan:
+            # This gets the first 8+1 digits of the kth term of the fibonacci sequence
             f = k* math.log10(phi) + math.log10(1/math.sqrt(5))
             f = int((pow(10, f-int(f) + 8)))
             if [int(i) for i in sorted(str(f))]==pan:
