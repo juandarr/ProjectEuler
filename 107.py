@@ -30,18 +30,46 @@ def read_matrix(filename):
 
 def check_connection(matrix):
     all_connected = True
+    links = {}
     for idx_r in range(len(matrix)):
-        connection_test = set([i for i in range(len(matrix)) if i!=idx_r])
-        connected_to = set([i for i in matrix[idx_r] if i!=0])
-    pass
+        links[idx_r]=[i for i in range(len(matrix[idx_r])) if matrix[idx_r][i]!=0]
+    for idx_r in range(len(matrix)):
+        connection_test = set([i for i in range(len(matrix[idx_r]))])
+        connected_to = set([idx_r]+links[idx_r])
+        is_valid = True
+        while True:
+            tmp = connected_to
+            for i in connected_to:
+                connected_to=connected_to.union(set(links[i]))
+            if connected_to==connection_test:
+                break
+            elif tmp==connected_to:
+                is_valid = False
+                break
+        if not is_valid:
+            return False
+    return True
+
+def take_sum(matrix):
+    total = 0
+    for idx_row in range(len(matrix)):
+        total += sum(matrix[idx_row][idx_row+1:])
+    return total
 
 def minimize_network(filename):
     matrix, edges = read_matrix(filename)
-    print(matrix[0][:10], len(edges), edges)
-
-    pass
+    total1 = take_sum(matrix)
+    for edge in edges:
+        matrix[edge[0][0]][edge[0][1]]=0
+        matrix[edge[0][1]][edge[0][0]]=0
+        if check_connection(matrix):
+            continue
+        else:
+            matrix[edge[0][0]][edge[0][1]]=edge[1]
+            matrix[edge[0][1]][edge[0][0]]=edge[1]
+            continue
+    return total1-take_sum(matrix)
 
 if __name__ == "__main__":
-    #filename = 'files/network.txt'
-    filename = 'files/network_test.txt'
+    filename = 'files/network.txt'
     print('The maximum saving by removing redundant edges is {0}'.format(minimize_network(filename))) 
