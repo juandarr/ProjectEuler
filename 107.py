@@ -1,5 +1,5 @@
 """
-Finds the number of triangles containing the origin in its interior
+Finds the minimum network where all vertices are connected by removing the redundant edges
 Author: Juan Rios
 """
 import math
@@ -62,12 +62,9 @@ def minimize_network(filename):
     for edge in edges:
         matrix[edge[0][0]][edge[0][1]]=0
         matrix[edge[0][1]][edge[0][0]]=0
-        if check_connection(matrix):
-            continue
-        else:
+        if not check_connection(matrix):
             matrix[edge[0][0]][edge[0][1]]=edge[1]
             matrix[edge[0][1]][edge[0][0]]=edge[1]
-            continue
     return total1-take_sum(matrix)
 
 if __name__ == "__main__":
