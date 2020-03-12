@@ -3,11 +3,15 @@ Finds the least value of n for which the number of distinct solutions exceeds on
 Author: Juan Rios
 """
 import math
-from utils import prime_factors, decompose_primes
+from utils import prime_factors, decompose_primes, find_divisors
 from itertools import combinations
 
-def product_pairs(n,primes):
-    prime_factors = decompose_primes(n,primes)
+def product_pairs(n):
+    '''
+    2. This function solves the problem finding every possible pair of factors given its prime decomposition
+    '''
+    primes = prime_factors(1000)
+    prime_factors = decompose_primes(n,primes,as_dict=False)
     prime_factors = [1]+prime_factors
     pairs = {}
     for r1 in range(1,len(prime_factors)//2+1):
@@ -27,6 +31,22 @@ def product_pairs(n,primes):
                             pairs[(a,b)]=1
     return len(pairs)+1
 
+def solution_given_primes():
+    '''
+    3. This function solves the problem using the prime decomposition to calculate the number of valid solutions
+    '''
+    n = 180100
+    primes = prime_factors(200000)
+    while True:
+        dec_primes = decompose_primes(n**2,primes, as_dict=True)
+        divs = 1
+        for p in dec_primes:
+            divs *= (dec_primes[p]+1)
+        if divs>1999:
+            return n
+            break
+        n += 1
+    
 def find_solution(n):
     y = n+1
     x = float('inf')
@@ -41,6 +61,9 @@ def find_solution(n):
     return solutions
 
 def explore_solutions():
+    '''
+    1. First solution, uses brute force to solve problem
+    '''
     n=180100
     c = 1
     while True:
@@ -53,6 +76,4 @@ def explore_solutions():
         n += 1
 
 if __name__ == "__main__":
-    n =180100
-    #primes = prime_factors(1000)
-    print('The least value of n exceeding 1 thousand distinct solutions is {0}'.format(explore_solutions())) 
+    print('The least value of n exceeding 1 thousand distinct solutions is {0}'.format(solution_given_primes())) 

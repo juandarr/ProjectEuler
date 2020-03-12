@@ -69,35 +69,51 @@ def elements_perm_k(elements,k):
 
 def find_divisors(n):
     """
-    Find divisors of n and return them sorted
+    Find divisors of n
     """
-    div = []
+    #div = []
+    count = 0
     sqrt_n = int(math.sqrt(n))
-    for d in range(1, sqrt_n+1):
+    if sqrt_n**2==n:
+        count += 1
+        #div.append(sqrt_n)
+    for d in range(1, sqrt_n):
         if n%d==0:
-            if d**2==n:
-                div.append(d)
-            else:
-                div.append(d)
-                div.append(n//d) 
-    div = sorted(div)
-    return div
+            #div.append(d)
+            #div.append(n//d)
+            count += 2 
+    return count
 
 """
 Decomposes n in prime factors 
 """
-def decompose_primes(n,primes):
+def decompose_primes(n,primes,as_dict=False):
     """
     Decompose number in n prime factors and group them in groups of 2,3,...,n-1,n
     """
-    prime_factors = []
+    if as_dict:
+        prime_factors = {}
+    else:
+        prime_factors = []
     tmp = n
     for div in primes:
         if div>math.sqrt(n):
             break
         while tmp%div==0:
             tmp //= div
-            prime_factors.append(div)
+            if as_dict:
+                if div in prime_factors:
+                    prime_factors[div]+=1
+                else:
+                    prime_factors[div]=1
+            else:
+                prime_factors.append(div)
     if tmp>1:
-        prime_factors.append(tmp)
+        if as_dict:
+            if tmp in prime_factors:
+                prime_factors[tmp]+=1
+            else:
+                prime_factors[tmp]=1
+        else:
+            prime_factors.append(tmp)
     return prime_factors
