@@ -37,9 +37,9 @@ def primes_runs():
     m = {}
     n = {}
     s = {}
-    limit = 999999999
-    digits= '0123456789'
     multiple = 9
+    limit = int('9'*multiple)
+    digits= '0123456789'
     for d in digits:
         m[d]=0
         n[d]=0
@@ -58,26 +58,22 @@ def primes_runs():
                             visited[num]=1
                             if is_prime(num_int,primes):
                                 max_checker(num,m,n,s)
-    for d1 in '028':
+    complement = ''.join([d for d in digits if m[d]!=multiple])
+    for d1 in complement:
         ar = d1*(multiple-1)
-        for d2 in digits:
-            if d2!=d1:
-                for idx in range(len(ar)+1):
-                    num = ar[:idx]+d2+ar[idx:]
-                    for d3 in digits:
-                        if d3!=d1:
-                            for idx1 in range(len(num)+1):
-                                num1 = num[:idx1]+d3+num[idx1:]
-                                num1_int = int(num1)
-                                if num1_int>limit:
-                                    if num1 not in visited:
-                                        visited[num1]=1
-                                        if is_prime(num1_int,primes):
-                                            max_checker(num1,m,n,s)
+        for d2 in ''.join([d for d in digits if d!=d1]):
+            for idx in range(len(ar)+1):
+                num = ar[:idx]+d2+ar[idx:]
+                for d3 in ''.join([d for d in digits if d!=d1]):
+                    for idx1 in range(len(num)+1):
+                        num1 = num[:idx1]+d3+num[idx1:]
+                        num1_int = int(num1)
+                        if num1_int>limit:
+                            if num1 not in visited:
+                                visited[num1]=1
+                                if is_prime(num1_int,primes):
+                                    max_checker(num1,m,n,s)
     return sum(s.values())
-
-
-
 
 if __name__ == "__main__":
     print('The sum of all runs of primes with maximum 1-9 digits repetitions is {0}'.format(primes_runs())) 
