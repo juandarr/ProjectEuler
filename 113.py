@@ -73,6 +73,7 @@ def non_bouncy_generator(power):
                         visited[i+dsc]=1
                 else:
                     break
+        print(n+1,len(ascending[n]),len(neutral[n]),len(descending[n]),len(ascending[n])+len(neutral[n])+len(descending[n]))
         n+=1
     total = 0
     for i in neutral:
@@ -84,6 +85,6 @@ def non_bouncy_generator(power):
     return total
 
 if __name__ == "__main__":
-    power = 14
+    power = 15
     print('The amount of numbers below a googol that are not bouncy is {0}'.format(non_bouncy_generator(power)))
      
