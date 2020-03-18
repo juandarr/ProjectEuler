@@ -80,7 +80,7 @@ def palindromic_sets(limit_n):
     t0 = time()
     for j in pool[1]:
         for number in permutations([str(i) for i in range(1,10) if i!=j]):
-            if number[-1] in ['2','4','5','6','8']:
+            if number[-1] in ['2','4','5','6','8'] or (45-j)%3==0:
                 continue
             num = int(''.join(number))
             if is_prime(num,primes):
@@ -109,7 +109,7 @@ def palindromic_sets(limit_n):
         if len(var)==1:
             keys=sorted(var.keys())
             for comb1 in combinations(pool[keys[0]], var[keys[0]]):
-                if sorted(''.join([str(i) for i in comb1]))==sorted('123456789'):
+                if set(''.join([str(i) for i in comb1]))==set('123456789'):
                     counter_set +=1
         elif len(var)==2:
             if 8 in var or 7 in var:
@@ -117,7 +117,7 @@ def palindromic_sets(limit_n):
             keys=sorted(var.keys())
             for comb1 in combinations(pool[keys[0]], var[keys[0]]):
                 for comb2 in combinations(pool[keys[1]], var[keys[1]]):
-                    if sorted(''.join([str(i) for i in comb1])+''.join([str(i) for i in comb2]))==sorted('123456789'):
+                    if set(''.join([str(i) for i in comb1])+''.join([str(i) for i in comb2]))==set('123456789'):
                         counter_set +=1
         elif len(var)==3:
             if 7 in var:
@@ -126,7 +126,7 @@ def palindromic_sets(limit_n):
             for comb1 in combinations(pool[keys[0]], var[keys[0]]):
                 for comb2 in combinations(pool[keys[1]], var[keys[1]]):
                     for comb3 in combinations(pool[keys[2]], var[keys[2]]):
-                        if sorted(''.join([str(i) for i in comb1])+''.join([str(i) for i in comb2])+''.join([str(i) for i in comb3]))==sorted('123456789'):
+                        if set(''.join([str(i) for i in comb1])+''.join([str(i) for i in comb2])+''.join([str(i) for i in comb3]))==set('123456789'):
                             counter_set +=1
     t1 = time()
     print('Time to calculate rest of combinations: ',t1-t0)
