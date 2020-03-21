@@ -9,13 +9,14 @@ def minimum_products(limit_n):
     returns the sum of all minimum number of multiplications to compute n^k for k>=1 and k<=200
     '''
     ar = [[1]]
-    k = [i for i in range(2,limit_n+1)]
+    k = {}
     m = {}
-    for val in k:
+    for val in range(2,limit_n+1):
         m[val]=float('inf')
+        k[val]=1
     l = 1
     mini = 0
-    while len(k)>0:
+    while k!={}:
         tmp = []
         for i in ar:
             pivot = i[-1]
@@ -25,8 +26,8 @@ def minimum_products(limit_n):
                 if pivot+j<=limit_n:
                     if m[pivot+j]>l:
                         m[pivot+j]=l
-                        k.remove(pivot+j)
-                        if len(k)==0:
+                        k.pop(pivot+j,None)
+                        if k=={}:
                             completed = True
                             break
             if completed:
