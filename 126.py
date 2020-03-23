@@ -44,7 +44,10 @@ def cuboid_explorer(limit_n,limit_l,limit_explore):
                     if 2*(h*w+h*d+w*d)<limit_l:
                         update_layers((h,w,d),cub,candidates,limit_n,limit_l)
                     else:
-                        continue
+                        break
+            else:
+                break
+    return 'Value not found'
 
 if __name__ == "__main__":
     limit_n = 1000
