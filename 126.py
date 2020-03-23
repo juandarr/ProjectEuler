@@ -11,25 +11,21 @@ def update_layers(dim,cub,limit_n,limit_l):
     a,b,c = dim
     l = 2*(a*b+a*c+b*c)
     base = 4*(a+b+c)
-    if l in cub:
-        cub[l]+=1
-    else:
-        cub[l]=1
     mul = 0
     while l<limit_l:
-        l = l + base +8*mul
         if l in cub:
             cub[l]+=1
         else:
             cub[l]=1
+        l = l + base +8*mul
         mul += 1
 
 def cuboid_explorer(limit_n,limit_l,limit_explore):
     cub = {}
     for h in range(1,limit_explore):
-        if 6*(h**2)<limit_l:
+        if 2*(3*h**2)<limit_l:
             for w in range(h,limit_explore):
-                if 2*(h*w+h*w+w*w)<limit_l:
+                if 2*(2*h*w+w*w)<limit_l:
                     for d in range(w,limit_explore):
                         if 2*(h*w+h*d+w*d)<limit_l:
                             update_layers((h,w,d),cub,limit_n,limit_l)
