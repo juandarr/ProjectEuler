@@ -29,6 +29,7 @@ def radicals(limit_n):
 def find_abc_hits(limit_n):
     counter = 0
     total = 0
+    t0 = time()
     radical,square_free = radicals(limit_n)
     for c in range(limit_n-1,0,-1):
         if square_free[c]==1:
@@ -48,6 +49,8 @@ def find_abc_hits(limit_n):
                                 print(a,b,c)
                     else:
                         break
+    t1 = time()
+    print('Total time for solution: ',t1-t0)
     return counter,total
 
 if __name__ == "__main__":

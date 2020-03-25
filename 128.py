@@ -7,7 +7,10 @@ import math
 from utils import decompose_primes,prime_factors
 from time import time
 
-def get_rings(limit_r):
+
+# Function required for the initial try - Not used in the final solution
+def get_rings_bf(limit_r):
+
     '''
     calculates all the rings from 0 to limit_r
     '''
@@ -20,8 +23,9 @@ def get_rings(limit_r):
         limit_p += 6*r
     return rings,limit_p
 
-def prime_differences_tiles_brute_force(limit_r,n_th):
-    rings,limit_p = get_rings(limit_r)
+# Main function of initial try - Not used in the final solution
+def prime_differences_tiles_bf(limit_r,n_th):
+    rings,limit_p = get_rings_bf(limit_r)
     print(limit_p)
     primes = prime_factors(limit_p+1, False)
     c = 0
@@ -95,6 +99,7 @@ def prime_differences_tiles_brute_force(limit_r,n_th):
                         print(l,val,prev[idx],nex[idx], i,6*i-1,idx)
     print(avoid)
 
+
 def is_prime(num, primes):
     '''
     returns primes that are above below_limit and below above_limit
@@ -105,27 +110,32 @@ def is_prime(num, primes):
         elif num%p==0:
             return False
 
-def prime_differences_tiles_alt(n_th):
+def prime_differences_tiles(n_th):
     primes = prime_factors(10**6, True)
     total = 2
     r = 2
     while True:
         n = 0
-        
-        candidates = [6*r-1,12*r+5,6*r+1]
-        c = 0
-        for can in candidates:
-            if is_prime(can,primes):
-                c+=1
-                if c==3:
-                    total +=1
-                    if total==n_th:
-                        return 3*r**2-3*r+2+n
-        n = 6*r-1
+        n_max = 6*r-1
+        n_max_is_prime = False
+        if is_prime(n_max,primes):
+            n_max_is_prime = True
+            candidates = [12*r+5,6*r+1]
+            c = 1
+            for can in candidates:
+                if is_prime(can,primes):
+                    c+=1
+                    if c==3:
+                        total +=1
+                        if total==n_th:
+                            return 3*r**2-3*r+2+n
+        n = n_max
         p_prev = 2*n-(n+r-1)//r
         p_next = 2*n+(n+r-1)//r
-        candidates = [6*r-1,6*r-6-p_prev+2*n,6*r-6+n,6*r-1-2*n+p_next,6*r-2*n+p_next]
         c = 0
+        if n_max_is_prime:
+            c +=1
+        candidates = [6*r-6-p_prev+2*n,6*r-6+n,6*r-1-2*n+p_next,6*r-2*n+p_next]
         for can in candidates:
             if is_prime(can,primes):
                 c+=1
@@ -137,4 +147,4 @@ def prime_differences_tiles_alt(n_th):
 
 if __name__ == "__main__":
     n_th = 2000
-    print('The {0}th tile in the sequence of tiles being surrouded with 3 prime differences is {1}'.format(n_th,prime_differences_tiles_alt(n_th)))
+    print('The {0}th tile in the sequence of tiles being surrouded with 3 prime differences is {1}'.format(n_th,prime_differences_tiles(n_th)))
