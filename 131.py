@@ -19,7 +19,6 @@ def primes_square_cube(limit_n):
             break
         if primes_index[tmp]==1:
             counter+=1
-            print(tmp)
         n += 2
     return counter
 
