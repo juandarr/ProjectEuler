@@ -1,4 +1,5 @@
 import math
+from functools import reduce
 
 """
  Returns an array with prime numbers using the prime sieve

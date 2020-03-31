@@ -8,23 +8,6 @@ from utils import prime_factors, decompose_primes
 from time import time
 from functools import reduce
 
-def divisorGen(n,primes):
-    factors = decompose_primes(n,primes, True)
-    factors = [(key,factors[key]) for key in factors]
-    nfactors = len(factors)
-    f = [0] * nfactors
-    while True:
-        yield reduce(lambda x, y: x*y, [factors[x][0]**f[x] for x in range(nfactors)], 1)
-        i = 0
-        while True:
-            f[i] += 1
-            if f[i] <= factors[i][1]:
-                break
-            f[i] = 0
-            i += 1
-            if i >= nfactors:
-                return
-
 def check_compatibility(u,v,k):
     z = (v-u)//4
     if (math.sqrt(4*(z**2)+k)-z)%3==0:
