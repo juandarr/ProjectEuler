@@ -48,7 +48,7 @@ def check_compatibility(u,v,k):
 """
 Finds complementary products of n
 """
-def divisors_arithmetic_sequence(limit_n):
+def divisors_arithmetic_sequence(limit_n,solutions):
     total = 0
     primes_index = prime_factors(3*10**6, False)
     t0 = time()
@@ -56,12 +56,17 @@ def divisors_arithmetic_sequence(limit_n):
         subtotal = 0
         k = 3*n
         if primes_index[k]==0:
-            sqrt_k = math.sqrt(k)
-            for d in range(1, math.ceil(sqrt_k)):
-                if k%d==0:
-                    if (d%2)+((k//d)%2)!=1:
-                        if check_compatibility(d,k//d,k):
-                            subtotal+=1
+            if n%4 in (0,3):
+                sqrt_k = math.sqrt(k)
+                for d in range(1, math.ceil(sqrt_k)):
+                    if k%d==0:
+                        if (d%2)+((k//d)%2)!=1:
+                            if check_compatibility(d,k//d,k):
+                                subtotal+=1
+                                if subtotal>solutions:
+                                    break
+        if subtotal==solutions:
+            total += 1
     t1 =time()
     print('Total time to get solution: ',t1-t0)
     return total
@@ -69,4 +74,4 @@ def divisors_arithmetic_sequence(limit_n):
 if __name__ == "__main__":
     limit_n = 10**6
     solutions = 10
-    print('The amount of values that solve the equation z**2-y**2-x**2=n, with {0} solutions is {1}'.format(solutions,divisors_arithmetic_sequence(limit_n)))
+    print('The amount of values that solve the equation z**2-y**2-x**2=n, with {0} solutions is {1}'.format(solutions,divisors_arithmetic_sequence(limit_n,solutions)))
