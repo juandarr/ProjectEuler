@@ -56,13 +56,13 @@ def check_compatibility(u,v,k):
     return False
 
 """
-Finds complementary products of n
+Finds complementary products of n, this functions was used to identify the factors of n
 """
-def divisors_arithmetic_sequence(limit_n,solutions):
+def divisors_arithmetic_sequence_bf(limit_n,solutions):
     total = 0
     primes_index = prime_factors(3*limit_n, False)
     print('Primes calculated!')
-    #primes = prime_factors(10**4)
+    primes = prime_factors(10**4)
     t0 = time()
     p = 1
     for n in range(1,limit_n+1):
@@ -74,8 +74,9 @@ def divisors_arithmetic_sequence(limit_n,solutions):
         if primes_index[k]==0:
             if n%4 in (0,3):
                 sqrt_k = math.sqrt(k)
-                #factors = divisorGen(k,primes)
-                #factors = decompose_primes(n,primes)
+                factors = list(decompose_primes(n,primes))
+                print(k,n%4,'Candidate',factors)
+                factors = decompose_primes(n,primes)
                 for d in range(1, math.ceil(sqrt_k)):
                     if k%d==0:
                         if (d%2)+((k//d)%2)!=1:
@@ -84,13 +85,34 @@ def divisors_arithmetic_sequence(limit_n,solutions):
                                 if subtotal>solutions:
                                     break
         if subtotal==solutions:
-            #print(k,list(factors))
+            print(k,list(factors))
             total += 1
     t1 =time()
     print('Total time to get solution: ',t1-t0)
     return total
-        
+
+"""
+Finds the valus of n with a unique solution 
+"""
+def divisors_arithmetic_sequence(limit_n):
+    total = 0
+    factors=[1]+prime_factors(limit_n)[1:]
+    print('Primes calculated!')
+    t0 = time()
+    for p in factors:
+        if p%4==3:
+            total+=1
+        if 4*p<limit_n:
+            total+=1
+        else:
+            continue
+        if 16*p<limit_n:
+            total+=1
+    t1 =time()
+    print('Total time to get solution: ',t1-t0)
+    return total
+
 if __name__ == "__main__":
     limit_n = 50*10**6
     solutions = 1
-    print('The amount of values that solve the equation z**2-y**2-x**2=n, with {0} solutions is {1}'.format(solutions,divisors_arithmetic_sequence(limit_n,solutions)))
+    print('The amount of values that solve the equation z**2-y**2-x**2=n, with {0} solutions is {1}'.format(solutions,divisors_arithmetic_sequence(limit_n)))
