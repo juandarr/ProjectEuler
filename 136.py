@@ -4,37 +4,13 @@ Author: Juan Rios
 """
 
 import math
-from utils import prime_factors
+from utils import prime_factors, decompose_primes
 from time import time
 from functools import reduce
 
-"""
-Decomposes n in prime factors 
-"""
-def decompose_primes(n,primes):
-    """
-    Decompose number in n prime factors and group them in groups of 2,3,...,n-1,n
-    """
-    prime_factors = []
-    tmp = n
-    for div in primes:
-        counter= 0
-        if div>math.sqrt(n):
-            break
-        while tmp%div==0:
-            tmp //= div
-            counter +=1
-        if counter>0:
-            yield (div,counter)        
-            #prime_factors.append((div,counter))
-    if tmp>1:
-        prime_factors.append((tmp,1))
-        yield (tmp,1)
-    #return prime_factors
-    return
-
 def divisorGen(n,primes):
-    factors = list(decompose_primes(n,primes))
+    factors = decompose_primes(n,primes, True)
+    factors = [(key,factors[key]) for key in factors]
     nfactors = len(factors)
     f = [0] * nfactors
     while True:
