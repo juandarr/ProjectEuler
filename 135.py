@@ -40,10 +40,9 @@ def arithmetic_sequence_differences_bf(limit_n):
     return total
 
 def check_compatibility(u,v,k):
-    if (u%2)+(v%2)!=1:
-        z = (v-u)//4
-        if (math.sqrt(4*(z**2)+k)-z)%3==0:
-            return True
+    z = (v-u)//4
+    if (math.sqrt(4*(z**2)+k)-z)%3==0:
+        return True
     return False
 
 """
@@ -57,16 +56,12 @@ def divisors_arithmetic_sequence(limit_n):
         subtotal = 0
         k = 3*n
         if primes_index[k]==0:
-            if check_compatibility(1,k,k):
-                subtotal+=1
             sqrt_k = math.sqrt(k)
-
-            for d in range(2, math.ceil(sqrt_k)):
+            for d in range(1, math.ceil(sqrt_k)):
                 if k%d==0:
-                    if check_compatibility(d,k//d,k):
-                        subtotal+=1
-            if subtotal==solutions:
-                total += 1
+                    if (d%2)+((k//d)%2)!=1:
+                        if check_compatibility(d,k//d,k):
+                            subtotal+=1
     t1 =time()
     print('Total time to get solution: ',t1-t0)
     return total
