@@ -26,14 +26,14 @@ def isosceles_nuggets(n_th):
                 if (s_rounded-1)%5==0:
                     val1 = (s_rounded-1)//5
                     if (val1+1)%2==0:
-                        sols.append(round(l))  
+                        sols.append(round(l)//10)  
                 if (s_rounded+1)%5==0:
                     val2 = (s_rounded+1)//5
                     if (val2-1)%2==0:
-                        sols.append(round(l))
+                        sols.append(round(l)//10)
     sols= sorted(sols)
     return sum(sols[:12])
 
 if __name__ == "__main__":
-    n_th = 200
+    n_th = 15
     print('The the sum of L, the side of an isosceles triangles with h = b+-1 and b,L, positive integers is {0}'.format(isosceles_nuggets(n_th)))
