@@ -1,5 +1,7 @@
 import math
 from functools import reduce
+from sympy.ntheory import factorint
+from functools import reduce
 
 """
  Returns an array with prime numbers using the prime sieve
@@ -89,8 +91,12 @@ def find_divisors(n):
 This function calculates the divisors of n given its prime decomposition
 '''
 def divisorGen(n,primes):
-    factors = decompose_primes(n,primes, True)
-    factors = [(key,factors[key]) for key in factors]
+    #t0 = time()
+    #factors = decompose_primes(n,primes)
+    factors = factorint(n)
+    factors =[(key,factors[key]) for key in factors]
+    #t1 = time()
+    #print('Time to get primes: ',t1-t0)
     nfactors = len(factors)
     f = [0] * nfactors
     while True:
@@ -103,6 +109,8 @@ def divisorGen(n,primes):
             f[i] = 0
             i += 1
             if i >= nfactors:
+                #t2 = time()
+                #print('Time to use generator: ',t2-t1)
                 return
 
 """
