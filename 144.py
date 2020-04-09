@@ -29,19 +29,6 @@ def pi():
     getcontext().prec -= 2
     return +s               # unary plus applies the new precision
 
-# Create the frames
-'''
-frames = []
-x, y = 0, 0
-for i in range(10):
-    new_frame = create_image_with_ball(400, 400, x, y, 40)
-    frames.append(new_frame)
-    x += 40
-    y += 40
-'''
-
-
-
 """
 Finds how many  how many  times a laser beam hits internally an eliptic mirror before leaving
 """
@@ -93,7 +80,6 @@ def eliptic_mirror(x0,y0,x1,y1):
             frames[0].save('laser_beam.gif', format='GIF', append_images=frames[1:], save_all=True, duration=100, loop=0)
             return contacts
         contacts+=1
-        #print('Contact {0}, New points:'.format(contacts),(round(x0,4),round(y0,4)),(round(x1,4),round(y1,4)))
 
 if __name__ == "__main__":
     print('The amount of times a laser beam hits internally an eliptic mirror before leaving is {0}'.format(eliptic_mirror(Decimal(0), Decimal(10.1),Decimal(1.4),Decimal(-9.6))))
