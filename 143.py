@@ -11,10 +11,8 @@ Finds the torricelli triangles with n+p+q<=120000
 """
 def torricelli_triangles(limit_n):
     squares ={}
-    roots = {}
     for i in range(1,10**6):
         squares[i**2]=i
-        roots[i]=math.sqrt(i)
     sum_pqr = 0
     visited = {}
     t0 = time()
@@ -40,6 +38,7 @@ def torricelli_triangles(limit_n):
     print('Total time to calculate solution: ', t1-t0)
     return sum_pqr
 
+# Takes about one hours to reach the solution. Look at it later for a better algorithm.
 if __name__ == "__main__":
     limit_n = 120000
     print('The number of the torricelli triangles with n+p+q<120000 is {0}'.format(torricelli_triangles(limit_n)))
