@@ -9,51 +9,6 @@ from time import time
 """
 Finds the torricelli triangles with n+p+q<=120000
 """
-'''
-def torricelli_triangles(limit_n):
-    squares ={}
-    for i in range(1,10**6):
-        squares[i**2]=i
-    primes = prime_factors(10**6)
-    counter = 0
-    sti = []
-    for t in range(1,100000):
-        ts = t**2
-        t_factors = decompose_primes(t, primes,True)
-        for s in range(1,t//2+1):
-            if s/t>=0.5:
-                break
-            valid = True
-            for f in t_factors:
-                if s%f==0:
-                    valid = False
-                    break
-            if not(valid):
-                break
-            if (ts-3*(s**2)) in squares:
-                sti.append([s,t,squares[(ts-3*(s**2))]])
-                counter +=1
-    print(counter)
-    a = 399
-    b = 455
-    c = 511
-    for i in sti:
-        if (2*i[0]*a)%i[1]==0 and ((i[2]-i[0])*a)%i[1]==0:
-            print('From a: ',(i[0],i[1]))
-            print('q: {0}, r: {1}'.format(2*i[0]*a//i[1],(i[2]-i[0])*a//i[1]))
-    for i in sti:
-        if (2*i[0]*b)%i[1]==0 and ((i[2]-i[0])*b)%i[1]==0:
-            print('From b: ',(i[0],i[1]))
-            print('q: {0}, p: {1}'.format(2*i[0]*b//i[1],(i[2]-i[0])*b//i[1]))
-    for i in sti:
-        if (2*i[0]*b)%i[1]==0 and ((i[2]-i[0])*c)%i[1]==0:
-            print('From c: ',(i[0],i[1]))
-            print('p: {0}, r: {1}'.format(2*i[0]*c//i[1],(i[2]-i[0])*c//i[1]))
-'''
-
-"""
-Finds the torricelli triangles with n+p+q<=120000
-"""
 def torricelli_triangles(limit_n):
     squares ={}
     roots = {}
