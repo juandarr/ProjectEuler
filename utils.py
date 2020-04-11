@@ -3,6 +3,17 @@ from functools import reduce
 from sympy.ntheory import factorint
 from functools import reduce
 
+def is_prime(num, primes):
+    '''
+    returns primes that are above below_limit and below above_limit
+    '''
+    limit = int(math.sqrt(num))
+    for p in primes:
+        if p>limit:
+            return True
+        elif num%p==0:
+            return False
+            
 """
  Returns an array with prime numbers using the prime sieve
  This array can be in two forms:

@@ -35,6 +35,7 @@ def reverse_generator(start, limit_n):
             i=max_gap+10**7+1
             max_gap += 2*10**7
         yield i
+
 """
 Finds the amount of reversible numbers below limit_n
 """

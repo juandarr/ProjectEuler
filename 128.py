@@ -104,8 +104,9 @@ def is_prime(num, primes):
     '''
     returns primes that are above below_limit and below above_limit
     '''
+    limit = int(math.sqrt(num))
     for p in primes:
-        if p>int(math.sqrt(num)):
+        if p>limit:
             return True
         elif num%p==0:
             return False
