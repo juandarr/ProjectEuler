@@ -10,11 +10,13 @@ from utils import prime_factors
 # Generator of possible values to visit
 def n_generator(start, limit_n):
     i = start
+    yield i
     while i<limit_n:
         i+=10
-        if i%3==0 or i%7==0 or i%13==0:
+        if i%3==0 or i%7 in [0,1,2,5,6] or i%13==0:
             continue
         yield i
+        
 
 def are_consecutive_primes(num, primes):
     limit = int(math.sqrt(num+27))
