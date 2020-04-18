@@ -94,6 +94,7 @@ def pascal_multiple_seven_alt(limit_row):
 Finds the number of entries with numbers multiple of 7 in the pascal's  triangle 
 """
 def pascal_multiple_seven(limit_row,p):
+    t0 = time()
     ar = [1]
     n = 1
     total = 3
@@ -109,6 +110,10 @@ def pascal_multiple_seven(limit_row,p):
                 ar[idx] = (ar[idx]+res)%p
                 base *= (ar[idx]+1)
                 res = tmp//p
+                if res==0:
+                    for i in ar[idx+1:]:
+                        base *= (i+1)
+                    break
             if res==1:
                 ar.append(1)
                 base *=2
@@ -116,9 +121,36 @@ def pascal_multiple_seven(limit_row,p):
             partial = (ar[0]+1)
         total += base*partial
         #print(ar)
+    t1 =time()
+    print('Total time to reach solution: ', t1-t0)
     return total
 
+'''
+Convert to base 7: n is a number in base 10, convertion is done to base p
+'''
+def convertion(n,p):
+    ar = []
+    while n>(p-1):
+        res = n%p
+        ar.append(res)
+        n //=p
+    ar.append(n)
+    return ar[::-1]
+
+"""
+Finds the number of entries with numbers multiple of 7 in the pascal's  triangle 
+"""
+def pascal_multiple_seven_recursive(n,p):
+    if n<p:
+        print(n)
+        return (n*(n+1)//2)
+    ar = convertion(n, p)
+    print(n,ar)
+    d = ar[-1]
+    k = len(ar)
+    return (d*(d+1)//2)*((p*(p+1)//2))**(k-1)+(d+1)*pascal_multiple_seven_recursive(n//p,p)
+    
 if __name__ == "__main__":
-    limit_row=int(10**9-1)
+    limit_row=int(10**2-1)
     p = 7
-    print('The number of entries with numbers multiple of 7 in the pascal triangle in the first {0} rows is {1}'.format(limit_row+1,pascal_multiple_seven(limit_row,p)))
+    print('The number of entries with numbers multiple of 7 in the pascal triangle in the first {0} rows is {1}'.format(limit_row+1,pascal_multiple_seven_recursive(limit_row,p)))
