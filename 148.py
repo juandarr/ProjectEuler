@@ -10,7 +10,7 @@ from utils import prime_factors
 
 
 """
-Finds the number of entries with numbers multiple of 7 in the pascal's  triangle - It limited at about 10**4 because too many computations required
+Finds the number of entries with numbers not multiple of 7 in the pascal's  triangle - It limited at about 10**4 because too many computations required
 """
 def pascal_multiple_seven_bf(limit_row):
     prev_row=[0]*10**6
@@ -31,7 +31,7 @@ def pascal_multiple_seven_bf(limit_row):
     return total
 
 """
-Finds the number of entries with numbers multiple of 7 in the pascal's  triangle - Works up to 10**5
+Finds the number of entries with numbers not multiple of 7 in the pascal's  triangle - Works up to 10**5
 """
 def pascal_multiple_seven_alt(limit_row):
     #value_test,sequence = pascal_multiple_seven(limit_row)
@@ -86,12 +86,10 @@ def pascal_multiple_seven_alt(limit_row):
             base = inc
             counter += 1   
         print(inc,transition)
-# Wrong: 93294484786211968
-# Wrong: 53311222694553802
-# Wrong: 463239216834283032
+
 
 """
-Finds the number of entries with numbers multiple of 7 in the pascal's  triangle 
+Finds the number of entries with numbers not multiple of 7 in the pascal's  triangle 
 """
 def pascal_multiple_seven(limit_row,p):
     t0 = time()
@@ -138,19 +136,18 @@ def convertion(n,p):
     return ar[::-1]
 
 """
-Finds the number of entries with numbers multiple of 7 in the pascal's  triangle 
+Finds the number of entries with numbers not multiple of 7 in the pascal's  triangle 
 """
 def pascal_multiple_seven_recursive(n,p):
-    if n<p:
-        print(n)
-        return (n*(n+1)//2)
+    if n<=1:
+        return n
     ar = convertion(n, p)
-    print(n,ar)
-    d = ar[-1]
+    d = ar[0]
     k = len(ar)
-    return (d*(d+1)//2)*((p*(p+1)//2))**(k-1)+(d+1)*pascal_multiple_seven_recursive(n//p,p)
+    r = n-d*(p**(k-1))
+    return (d*(d+1)//2)*((p*(p+1)//2)**(k-1))+(d+1)*pascal_multiple_seven_recursive(r,p)
     
 if __name__ == "__main__":
-    limit_row=int(10**2-1)
+    limit_row=int(10**9)
     p = 7
-    print('The number of entries with numbers multiple of 7 in the pascal triangle in the first {0} rows is {1}'.format(limit_row+1,pascal_multiple_seven_recursive(limit_row,p)))
+    print('The number of entries with numbers not multiple of 7 in the pascal triangle in the first {0} rows is {1}'.format(limit_row+1,pascal_multiple_seven_recursive(limit_row,p)))
