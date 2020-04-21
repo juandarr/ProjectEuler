@@ -7,58 +7,40 @@ import math
 from time import time
 from utils import prime_factors
 
-def calculate_expected_value(options):
-    for group in options[0]:
-        for group2 in options[1]:
-            for group3 in options[2]:
-                for group4 in options[3]:
-                    print(group,group2,group3,group4)
-
 """
 Finds the expected number of times the foreman finds a single sheet of paper in the envelope during the week
 """
 def expected_value():
     day = 2
-    options = [[[[[1,1,1,1]]]]]
-    total = 1
-    sheet_unit=0
-    prob = 0
+    paths = [[[1,1,1,1]]]
     while day < 15:
         day+=1
         counter_unit = 0
-        level = []
-        for lev in options[-1]:
-            for group in lev:
-                tmp_group=[]
-                for opt in group:
-                    tmp_ar = []  
-                    for idx in range(len(opt)):
-                        if opt[idx]>0:
-                            tmp = opt.copy()
-                            tmp[idx]-=1
-                            for idx2 in range(idx+1,len(opt)):
-                                tmp[idx2]+=1
-                            tmp_ar.append(tmp)
-                    tmp_group.append(tmp_ar)
-                level.append(tmp_group)
-        options.append(level)
-    c = 2
-    for level in options:
-        ones = 0
-        counter=0
-        
-        for group in level:
-            for opt in group:
-                for i in opt:
-                    if sum(i)==1:
-                        ones +=1
-                    counter+=1
-        prob += ones/counter
-        print(c,ones,counter)
-        c+=1
-    sol =calculate_expected_value(options)
-
-    return prob
+        tmp_ar = []
+        for path in paths:
+            for idx in range(len(path[-1])):
+                if path[-1][idx]>0:
+                    tmp = path[-1].copy()
+                    tmp[idx]-=1
+                    for idx2 in range(idx+1,len(path[-1])):
+                        tmp[idx2]+=1
+                    tmp_ar.append(path+[tmp])
+        paths =tmp_ar
+    freq = {}
+    for path in paths:
+        k = 0
+        for opt in path:
+            if sum(opt)==1:
+                k+=1
+        if k not in freq:
+            freq[k]=1
+        else:
+            freq[k]+=1
+    print(len(paths),freq)
+    sol  = 0
+    for key in freq:
+        sol += key*freq[key]
+    return sol/len(paths)
 
 # Wrong: 0.264940
 # Wrong: 0.108130
@@ -78,6 +60,9 @@ def expected_value():
 # Wrong: 0.386195
 # Wrong: 1.158585
 # Wrong: 5.406731
+# Wrong: 0.333666
+# Wrong: 0.385514
+# Wrong: 0.385515
 
 if __name__ == "__main__":
-    print('The expected value to six decimal places is {0:.6f}'.format(expected_value()))
+    print('The expected value to six decimal places is {0}'.format(expected_value()))
