@@ -2,8 +2,6 @@
 Finds the largest palindrome product of two numbers of 3 digits
 Author: Juan Rios
 """
-import math
-
 # Finds the largest palindrome producto of two 3 digit factors
 def largest_palindrome():
     max_val = 0

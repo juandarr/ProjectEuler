@@ -1,5 +1,5 @@
 """
-Adds the even valued numbers of the fibonacci series below limit
+Adds the even valued numbers of the fibonacci series below or equal to limit
 Author: Juan Rios
 """
 

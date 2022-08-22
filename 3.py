@@ -8,11 +8,14 @@ import itertools
 # Finds the prime factors of number
 def prime_factors(number):
     primes = []
+    # Loop through number 2, and every odd number below sqrt(number)
     for i in itertools.chain([2],range(3,math.floor(math.sqrt(number))+1,2)):
+        # If number is divisible by i
         while(number%i==0):
-            primes.append(i)
-            number /= i
+            primes.append(i) # Add the number to the list of prime decomposition
+            number /= i # Get the complement factor, where oldNumber = newNumber*i
         if number==1:
+            # If number is 1, return primes list
             return primes
     return primes
 
